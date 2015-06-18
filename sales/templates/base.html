@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/pages.js"></script>
+    <script type="text/javascript" src="/static/js/accordion.js"></script>
+    <script type="text/javascript" src="/static/js/nkl.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="header">
+         {% block header %}{% endblock header %}
+      </div>
+      <div class="content">
+         {% block content %}{% endblock content %}
+      </div>
+    </div>
+  </body>
+</html>
+

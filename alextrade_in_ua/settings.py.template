@@ -1,2 +1,48 @@
 
 from base_settings import *
+
+DEBUG=False
+
+SECRET_KEY = 'qx^9($b$=8ti0znxb!!p3buq!(zxk=k-vi&(s&w=_+2@!fpye-'
+
+ALLOWED_HOSTS = ['*']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'alextrade_db',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': 'Hell0 World',                  # Not used with sqlite3.
+        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', 'static'))
+
+MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', 'media'))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d \n%(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.abspath(os.path.join(BASE_DIR, '..', 'log', 'error.log')),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+        },
+    },
+}

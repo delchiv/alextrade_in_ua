@@ -1,0 +1,20 @@
+{% extends "role-hdr.html" %}
+
+{% block content %}
+<div id="admin-role">
+  <ul class="page-list"></ul>
+  <div class="page active-page" id="admin-role1">
+    <h1>Администратор</h1>
+    {% include "admin-role/index.html" %}
+  </div>
+  <div class="page" id="admin-role2">
+    <h1>Оператор</h1>
+    {% include "oper-role/index.html" %}
+  </div>
+  <div class="page" id="admin-role3">
+    <h1>Агент</h1>
+    {% include "agent-role/index.html" %}
+  </div>
+</div>
+<script>MakePages("admin-role")</script>
+{% endblock %}
