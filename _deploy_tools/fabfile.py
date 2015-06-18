@@ -6,18 +6,19 @@ import random
 
 REPO_URL = 'https://github.com/delchiv/alextrade_in_ua.git'
 PROJECT_NAME = 'alextrade_in_ua'
+SITE_NAME = 'alextrade.in.ua'
 
 def deploy():
-    site_folder = '/home/%s/sites/%s' % (env.user, env.host)
+    site_folder = '/home/%s/sites/%s' % (env.user, SITE_NAME)
     source_folder = site_folder + '/src'
     settings_folder = source_folder + '/' + PROJECT_NAME
     _create_directory_structure_if_necessary(site_folder)
     _get_latest_source(source_folder)
-    _update_settings(settings_folder, env.host)
+#    _update_settings(settings_folder, env.host)
     _update_virtualenv(source_folder)
     _update_static_files(source_folder)
     _update_database(source_folder)
-    _restart_apps(env.host)
+    _restart_apps(SITE_NAME)
 
 def _create_directory_structure_if_necessary(site_folder):
     for subfolder in ('db', 'static', 'media', 'venv', 'src', 'log'):
