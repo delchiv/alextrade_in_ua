@@ -55,7 +55,7 @@ def dict_to_str(d, lev=0):
     if type(d[key]) == type({}):
       res+="<li>%s%s</li>" % (key, dict_to_str(d[key],lev+1))
     else:
-      res+="""<li class="node"><span class="nam">%s</span><span class="c1">%s</span><span class="c2">%s</span><span class="c3">%s</span><span class="c4">%s</span><span class="cnt">%s</span><input class="val" type="number" name="%s" /></li>""" % tuple(d[key])
+      res+="""<li class="node"><span class="nam">%s</span><span class="c7">%s</span><span class="c1">%s</span><span class="c2">%s</span><span class="c3">%s</span><span class="c4">%s</span><span class="cnt">%s</span><input class="val" type="number" name="%s" /></li>""" % tuple(d[key])
   res+="</ul>"
   return res
 
@@ -69,7 +69,7 @@ def uploadsprtvr(request, **vargs):
       tvrs = {}
       tvrs_obj = []
       for t in content:
-        id,prz_g1,prz_g2,typ,nam,c4,c3,c2,c1,k = t.strip().split("\t")
+        id,prz_g1,prz_g2,typ,nam,c7,c4,c3,c2,c1,k = t.strip().split("\t")
         tvr, created = Tvr.objects.get_or_create(id=id)
         tvr.prz_g1 = prz_g1
         tvr.prz_g2 = prz_g2
@@ -80,6 +80,7 @@ def uploadsprtvr(request, **vargs):
         tvr.c2 = float(c2)
         tvr.c3 = float(c3)
         tvr.c4 = float(c4)
+        tvr.c7 = float(c7)
         tvr.save()
         tvrs_obj.append(tvr)
 
@@ -89,9 +90,9 @@ def uploadsprtvr(request, **vargs):
           if not tvrs[tvr.prz_g1].has_key(tvr.prz_g2):
             tvrs[tvr.prz_g1][tvr.prz_g2] = {}
         if tvrs[tvr.prz_g1].has_key(tvr.prz_g2):
-          tvrs[tvr.prz_g1][tvr.prz_g2][tvr.id] = (tvr.nam, tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
+          tvrs[tvr.prz_g1][tvr.prz_g2][tvr.id] = (tvr.nam, tvr.c7,tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
         else:
-          tvrs[tvr.prz_g1][tvr.id] = (tvr.nam, tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
+          tvrs[tvr.prz_g1][tvr.id] = (tvr.nam, tvr.c7,tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
                     	
       content, created = StaticContent.objects.get_or_create(nam="Tvr")
       content.val = dict_to_str(tvrs, 0)
@@ -142,9 +143,9 @@ def uploadost(request, **vargs):
           if not tvrs[tvr.prz_g1].has_key(tvr.prz_g2):
             tvrs[tvr.prz_g1][tvr.prz_g2] = {}
         if tvrs[tvr.prz_g1].has_key(tvr.prz_g2):
-          tvrs[tvr.prz_g1][tvr.prz_g2][tvr.id] = (tvr.nam, tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
+          tvrs[tvr.prz_g1][tvr.prz_g2][tvr.id] = (tvr.nam, tvr.c7,tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
         else:
-          tvrs[tvr.prz_g1][tvr.id] = (tvr.nam, tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
+          tvrs[tvr.prz_g1][tvr.id] = (tvr.nam, tvr.c7,tvr.c4,tvr.c3,tvr.c2,tvr.c1,int(tvr.k), tvr.id)
                     	
       content, created = StaticContent.objects.get_or_create(nam="Tvr")
       content.val = dict_to_str(tvrs, 0)
