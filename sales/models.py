@@ -15,6 +15,7 @@ class Tvr(models.Model):
   c2     = models.FloatField(blank=True, null=True,default=0)
   c3     = models.FloatField(blank=True, null=True,default=0)
   c4     = models.FloatField(blank=True, null=True,default=0)
+  c7     = models.FloatField(blank=True, null=True,default=0)
 
 class StaticContent(models.Model):
   nam = models.CharField(primary_key=True, max_length=255)
