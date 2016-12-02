@@ -8,6 +8,35 @@
     <script type="text/javascript" src="/static/js/pages.js"></script>
     <script type="text/javascript" src="/static/js/accordion.js"></script>
     <script type="text/javascript" src="/static/js/nkl.js"></script>
+    <script type="text/javascript">
+        function submitForm(event) {
+            $body = $("body");
+            $body.addClass("loading");
+
+            // Create a jQuery object from the form
+            $form = $(event.target);
+        
+            // Serialize the form data
+            var formData = new FormData($form);
+
+            $.ajax({
+                url: $form.attr('action'),
+                type: 'POST',
+                data: formData,
+                cache: false,
+                dataType: 'json',
+                success: function(data) {
+                    alert('Загрузка завершена');
+                },
+                complete: function() {
+                    // STOP LOADING SPINNER
+                    $body.removeClass("loading");                   
+                }
+            });
+
+            return false;
+        }
+    </script>
   </head>
   <body>
     <div class="main">
@@ -18,6 +47,7 @@
          {% block content %}{% endblock content %}
       </div>
     </div>
+    <div class="modal"><!-- Place at bottom of page --></div>
   </body>
 </html>
 

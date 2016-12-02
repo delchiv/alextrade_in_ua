@@ -4,7 +4,7 @@ import time
 import re
 import urllib
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -102,6 +102,9 @@ def uploadsprtvr(request, **vargs):
       tvrdate.val = time.strftime("%d.%m.%y %H:%M:%S", time.gmtime())
       tvrdate.save()
 
+    if request.is_ajax():
+        return JsonResponse({'success': True});
+
     return redirect("/sales/")
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -154,6 +157,9 @@ def uploadost(request, **vargs):
     ostdate, created = StaticContent.objects.get_or_create(nam="Ostdate")
     ostdate.val = time.strftime("%d.%m.%Y %H:%M:%S", time.gmtime())
     ostdate.save()
+
+    if request.is_ajax():
+        return JsonResponse({'success': True});
 
     return redirect("/sales/")
 

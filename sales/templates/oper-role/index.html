@@ -4,7 +4,7 @@
     <h1>Остатки</h1>
     <div class="toolbar">
       <div>
-        <form action="/sales/uploadost/" method="post" enctype="multipart/form-data">
+        <form id="id-ost" action="/sales/uploadost/" method="post" enctype="multipart/form-data">
           <input type="file" name="csv" />
           <input type="submit" value="Импортировать"/>
           {% csrf_token %}
@@ -49,4 +49,9 @@
     </table>
   </div>
 </div>
-<script>MakePages("oper")</script>
+<script>
+    MakePages("oper");
+    $(document).ready(function () {
+        $('#id-ost').on('submit', submitForm);
+    });
+</script>

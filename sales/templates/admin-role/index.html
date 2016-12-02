@@ -4,7 +4,7 @@
     <h1>Справочник товаров</h1>
     <div class="toolbar">
       <div>
-        <form action="/sales/uploadsprtvr/" method="post" enctype="multipart/form-data">
+        <form id="id-sptvr" action="/sales/uploadsprtvr/" method="post" enctype="multipart/form-data">
           <input type="file" name="csv" />
           <input type="submit" value="Импортировать"/>
           {% csrf_token %}
@@ -29,4 +29,7 @@
 <script>
   MakePages("admin");
   MakeAccordion("sprtvr");
+  $(document).ready(function () {
+      $('#id-sptvr').on('submit', submitForm);
+  });
 </script>
