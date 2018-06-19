@@ -7,9 +7,11 @@ import urllib
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.decorators.csrf import csrf_exempt
 
 from models import Tvr, StaticContent, Nkls
 
+@csrf_exempt
 @login_required(login_url='/login/')
 def adminpage(request, **vargs):
   user = request.user
@@ -59,6 +61,7 @@ def dict_to_str(d, lev=0):
   res+="</ul>"
   return res
 
+@csrf_exempt
 @user_passes_test(lambda u: u.is_superuser)
 def uploadsprtvr(request, **vargs):
   if request.POST:
@@ -107,6 +110,7 @@ def uploadsprtvr(request, **vargs):
 
     return redirect("/sales/")
 
+@csrf_exempt
 @user_passes_test(lambda u: u.is_superuser)
 def clearsprtvr(request, **vargs):
   if request.POST:
@@ -120,6 +124,7 @@ def clearsprtvr(request, **vargs):
 
     return redirect("/sales/")
 
+@csrf_exempt
 @user_passes_test(lambda u: u.is_staff)
 def uploadost(request, **vargs):
   if request.POST:
@@ -163,6 +168,7 @@ def uploadost(request, **vargs):
 
     return redirect("/sales/")
 
+@csrf_exempt
 @login_required(login_url='/login/')
 def savenkl(request, **vargs):
   if request.POST:
@@ -213,6 +219,7 @@ def savenkl(request, **vargs):
 
   return redirect("/sales/")
 
+@csrf_exempt
 @user_passes_test(lambda u: u.is_staff)
 def delnkl(request, **vargs):
   try: nkl = Nkls.objects.get(id=request.GET.get("id", None))
