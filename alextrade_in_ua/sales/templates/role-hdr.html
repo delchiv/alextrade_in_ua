@@ -1,0 +1,9 @@
+﻿{% extends "base.html" %}
+
+{% block header %}
+  Справочник товаров:&nbsp;<b>{{tvrdate.val}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Остатки:&nbsp;<b>{{ostdate.val}}</b>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% if user.get_full_name %}{{user.get_full_name}}{% else %}{{user}}{% endif %}<form style="display: inline;" id="logout_form" method="post" action="/logout/">
+    {% csrf_token %}
+    <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();">Выход</a>
+</form>
+{% endblock %}

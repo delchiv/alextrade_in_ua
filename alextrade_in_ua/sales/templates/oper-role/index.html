@@ -1,0 +1,60 @@
+<div id="oper">
+  <ul class="page-list"></ul>
+  <div class="page" id="oper1">
+    <h1>Остатки</h1>
+    <div class="toolbar">
+      <div>
+        <form id="id-ost" action="/sales/uploadost/" method="post" enctype="multipart/form-data">
+          <input type="file" name="csv" />
+          <input type="submit" value="Импортировать"/>
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="page active-page" id="oper2">
+    <h1>Накладные</h1>                         
+    <div class="toolbar">
+      &nbsp;
+    </div>
+    <table class="nkls" border="1">
+      <col width="7%">
+      <col width="12%">
+      <col width="30%">
+      <col >
+      <col width="10%">
+      <thead>
+        <tr>
+          <th>Статус</th>
+          <th>Дата</th>
+          <th>Кто</th>
+          <th>Кому</th>
+          <th colspan="2">*</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for nkl in nkls %}
+        <tr>
+          <td>{{nkl.downloads}}</td>    
+          <td>{{nkl.date|date:"d.m.Y H:i:s"}}</td>
+          <td>{% if nkl.user.get_full_name %}{{nkl.user.get_full_name}}{% else %}{{nkl.user}}{% endif %}</td>
+          <td>{{nkl.client}}</td>
+          <td>
+            <a href="/sales/savenkl/?id={{nkl.id}}">Загрузить</a>
+          </td>
+          <td> 
+            <a href="/sales/delnkl/?id={{nkl.id}}">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+    MakePages("oper");
+    $(document).ready(function () {
+        $('#id-ost').on('submit', submitForm);
+    });
+</script>

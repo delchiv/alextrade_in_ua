@@ -1,0 +1,63 @@
+<div id="agent">
+  <ul class="page-list"></ul>
+  <div class="page active-page" id="agent1">
+    <h1>Остатки</h1>
+    <div id="osttvr">
+      {{sprtvr|safe}}
+    </div>
+  </div>
+  <div class="page" id="agent2">
+    <h1>Накладная</h1>
+    <div id="nkl">
+      <form action="/sales/savenkl/" method="post">
+        <ul class="lev0">
+          <li>
+            <input name="client" type="text" value=""><input type="submit" val="Отправить"/>
+            <ul class="lev1"></ul>
+          </li>
+        </ul>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+  <div class="page" id="agent3">
+    <h1>Накладные</h1>                         
+    <div class="toolbar">
+      &nbsp;
+    </div>
+    <table class="nkls" border="1">
+      <col width="7%">
+      <col width="12%">
+      <col width="30%">
+      <col >
+      <col width="10%">
+      <thead>
+        <tr>
+          <th>Статус</th>
+          <th>Дата</th>
+          <th>Кто</th>
+          <th>Кому</th>
+          <th>*</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for nkl in nkls %}
+        <tr>
+          <td>{{nkl.downloads}}</td>
+          <td>{{nkl.date|date:"d.m.Y H:i:s"}}</td>
+          <td>{% if nkl.user.get_full_name %}{{nkl.user.get_full_name}}{% else %}{{nkl.user}}{% endif %}</td>
+          <td>{{nkl.client}}</td>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  MakePages("agent");
+  MakeAccordion("osttvr");
+  MakeNkl("osttvr","nkl");
+</script>
